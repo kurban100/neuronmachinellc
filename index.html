@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neuron Machine - Building an Agentic Tutor</title>
+  <link rel="stylesheet" href="https://w3schools.com">
+  <link rel="stylesheet" href="https://cloudflare.com">
+  <style>
+    html, body, h1, h2, h3, h4, h5, h6 { font-family: "Roboto", sans-serif; }
+    
+    /* SOLID BLACK RECTANGULAR TOP MENU */
+    .custom-topbar {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      height: 48px;
+    }
+
+    /* PURE WHITE TEXT NAVIGATION LINKS */
+    .custom-topbar a, .custom-topbar b {
+      color: #ffffff !important;
+      text-decoration: none;
+      line-height: 48px;
+      padding: 0 16px;
+      display: inline-block;
+    }
+
+    .custom-topbar a:hover {
+      background-color: #222222 !important;
+      color: #ffffff !important;
+    }
+
+    /* LOGO INSIDE WHITE SQUARE BOX */
+    .logo-square-container {
+      background-color:#f8f9fa !important;
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      margin-right: 8px;
+      vertical-align: middle;
+      padding: 2px;
+    }
+
+    .logo-square-container img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      filter: invert(1);
+    }
+    
+    /* IMPROVED VERTICAL SIDEBAR (175px WIDTH) */
+    .custom-sidebar {
+      position: fixed;
+      z-index: 3;
+      width: 90px; 
+      top: 48px;
+      bottom: 0;
+      height: calc(100% - 48px);
+      background-color: #fcfcfc !important; 
+      border-right: 1px solid #e0e0e0;
+      box-shadow: 1px 0 5px rgba(0,0,0,0.03); 
+      padding: 8px 6px !important; /* Space inside the sidebar box */
+    }
+
+    /* PURPLE TEXT STYLING FOR SIDEBAR ROWS */
+    .sidebar-purple-text {
+      color: #800080 !important; /* Deep Purple Color */
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 24px; /* Space between each row block */
+      font-weight: 500;
+    }
+    
+    /* Content Offset Adjustment */
+    .w3-main {
+      margin-left: 175px; 
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body class="w3-white">
+
+  <!-- Top Menu: True Solid Black Horizontal Strip -->
+  <div class="w3-top" style="z-index:4;">
+    <div class="w3-bar custom-topbar w3-left-align w3-large">
+      
+      <!-- Logo and Brand Anchor Links -->
+      <a href="#" style="padding-left: 12px; font-weight: bold;">
+        <span class="logo-square-container">
+          <img src="Neuron_Machine_Final_Logo.png" alt="Logo">
+        </span>
+        Neuron Machine
+      </a>
+      
+      <!-- White Text Menu Items -->
+      <a href="#neuroncopilot-home-section" class="w3-bar-item w3-button w3-hover-white">Home</a>
+      <a href="#neuroncopilot-page" class="w3-bar-item w3-button w3-hide-small w3-hover-white">NeuronCopilot</a>
+      <a href="#news-section" class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
+      <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+      <a href="#partners-section" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Partners</a>
+    </div>
+  </div>
+<div id="neuroncopilot-home-section"></div>
+
+
+  <!-- Sidebar: Permanent Left Narrow Column with Custom Text Layout -->
+  <nav class="w3-sidebar custom-sidebar" id="mySidebar">
+    
+    <!-- Row 1 -->
+    <a href="#" class="w3-bar-item w3-button tablink" onclick="openSection(event, 'NeuralNetwork')">🤖 Neural Network</a>
+    <!-- Row 3 --> 
+
+<button onclick="openSection(event, 'SoilScience')" class="w3-bar-item w3-button w3-text-purple w3-hover-light-grey" style="outline: none; border: none; font-weight: 500;color: #9c27b0 !important;">
+  🌱 Soil Science
+</button>
+
+
+
+
+  </nav>
+
+  <!-- Main Content Pipeline Area -->
+  <!-- Main Content Area -->
+<div class="w3-container" style="margin-left:200px;">
+
+  <!-- Neural Network Section -->
+  <div id="NeuralNetwork" class="section-content w3-container" style="display:none;">
+    <h2>Neural Network Presentation</h2>
+    <p>Click the button below to download the presentation slides.</p>
+    
+    <a href="Neural_Networks.pdf" download class="w3-button w3-blue w3-round">
+      📁 Download neural_networks.pptx
+    </a>
+  </div>
+
+</div>
+<!-- Soil Science Section --> 
+<div id="SoilScience" class="section-content w3-container" style="display:none; margin-left: 250px; padding-left: 16px;"> 
+  <h2>Soil Science Presentation</h2> 
+  <p>Click the button below to download the presentation slides.</p> 
+  <a href="Gley_Formation.pdf" download class="w3-button w3-blue w3-round"> 
+  📁 Download Gley_Formation.pdf 
+</a>
+</div>
+</div>
+
+
+<div class="w3-main">
+
+  <!-- ========================================== -->
+  <!-- ADDED: Interactive NeuronCopilot Page Section -->
+  <!-- ========================================== -->
+  <!-- Master Application View Wrapper for UI Toggling -->
+  <div id="view-classroom" class="app-view">
+  
+    <div id="neuroncopilot-page" class="w3-container w3-padding-32 w3-light-grey" style="border-bottom: 4px solid #009688;">
+      <div style="padding-left: 16px; padding-right: 16px;">
+        
+        <div class="w3-container w3-teal w3-round-large w3-margin-bottom">
+          <h1 style="font-weight: bold;">NeuronCopilot Project</h1>
+          <p class="w3-large">Your intelligent agentic assistant for cross-disciplinary research.</p>
+        </div>
+
+
+      <!-- Interactive Grid Layout -->
+      <div class="w3-row-padding" style="margin:0 -16px;">
+        
+            <!-- Clean, Continuous Content Block (No Blank Spaces) -->
+    <div class="w3-card-4 w3-white w3-padding-24 w3-container">
+      
+      <!-- System Overview -->
+      <h3 class="w3-text-teal" style="margin-top: 0;"><i class="fa fa-info-circle"></i> System Overview</h3>
+      <p class="w3-large">
+        An advanced AI layer designed to bridge neural computing with environmental data. It acts as your primary agentic substrate, evaluating integration layers across multi-disciplinary science domains.
+      </p>
+
+      <!-- Section Divider Line -->
+      <hr style="border-top: 1px solid #eee; margin: 24px 0;">
+
+      <!-- Connected Disciplines (Now pulled tightly underneath) -->
+      <h3 class="w3-text-teal"><i class="fa fa-database"></i> Connected Disciplines</h3>
+      <ul class="w3-ul w3-border-0 w3-large">
+        <li class="w3-padding-small"><strong>Neural Networks:</strong> Multidimensional token embeddings.</li>
+        <li class="w3-padding-small"><strong>Agricultural Engineering:</strong> Optimization & tech workflows.</li>
+        <li class="w3-padding-small"><strong>Soil Science:</strong> Microbial redox & wetland data mapping.</li>
+      </ul>
+      
+    </div>
+
+
+      </div>
+    </div>
+  </div>
+  <!-- ========================================== -->
+  <!-- END OF ADDED SECTION                       -->
+  <!-- ========================================== -->
+
+
+  <!-- Your Existing Blog Post Content Below -->
+  <div class="w3-row w3-padding-32">
+    
+    <!-- Left Column: Blog Post Content -->
+    <div class="w3-twothird w3-container" style="padding-left: 32px; padding-right: 32px;">
+      
+      <h1 class="w3-text-teal w3-padding-16" style="font-weight: bold; border-bottom: 2px solid #f1f1f1; margin-top: 0;">
+        Building an Agentic Tutor: Substrates for Learning
+      </h1>
+      
+      <!-- Section 1 -->
+      <section class="w3-padding-16">
+        <h3>1. The Substrate Thesis</h3>
+        <p>Wetlands transform structural composition through complex microbial redox environments. In direct symmetry, synthetic neural networks transform raw target vectors through continuous optimization of multidimensional token embeddings.</p>
+        <p>The deepest system parallel exists in biological human learners, who transform internal data models through structured, intentional educational pedagogy.</p>
+        <div class="w3-panel w3-leftbar w3-border-teal w3-light-grey w3-padding-large w3-margin-top">
+          <p class="w3-large w3-serif"><i>"I built NeuronCopilot to evaluate these programmatic integration layers directly..."</i></p>
+        </div>
+      </section>
+
+
+        <!-- Section 2 -->
+        <section class="w3-padding-16">
+          <h3>2. The Core Problem</h3>
+          <p>Modern commercial generative AI tutors operate primarily as shallow, conversational Q&A interfaces. They miss the essential core mechanics of comprehensive technical instruction.</p>
+          <p>True structural pedagogy dictates strict graph mapping of technical prerequisites alongside non-linear runtime adaptation based on a dynamic user baseline tracking matrix.</p>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="w3-padding-16">
+          <h3>3. System Architecture</h3>
+          <p>The autonomous orchestration engine splits parsing tasks across three decoupled architectural pipelines:</p>
+          <ul class="w3-ul w3-border-left w3-border-teal w3-light-grey">
+            <li class="w3-padding-16"><b>RAG Layer:</b> LlamaIndex execution pipeline coupled with local Ollama runtime engines.</li>
+            <li class="w3-padding-16"><b>Reasoning Layer:</b> Dynamic contextual knowledge graphs mapped inside Neo4j databases.</li>
+            <li class="w3-padding-16"><b>Pedagogical Layer:</b> State machines tracking 4 independent agent response modes.</li>
+          </ul>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="w3-padding-16">
+          <h3>4. System Performance Walkthrough</h3>
+          <p>Observe the runtime evaluation logs showing our 4 operational agent behaviors dynamically structuring context based on live execution feedback metrics:</p>
+          <div class="w3-card w3-light-grey w3-padding-24 w3-center w3-border w3-round w3-margin-top">
+            <i class="fa fa-youtube-play w3-text-red w3-jumbo"></i>
+            <p class="w3-large"><b>System Architecture Walkthrough Video</b></p>
+            <a href="https://youtu.be/9tne0ydZZeA
+" target="_blank" class="w3-button w3-black w3-hover-teal w3-round-large w3-margin-top">
+              Open Demonstration Video
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="w3-padding-16">
+          <h3>5. The Governance Principle</h3>
+          <p>The substrate chosen remains the definitive, structural lever for scaling operational knowledge systems. By upgrading the execution layer where state values resolve, you fundamentally optimize user processing efficiency.</p>
+        </section>
+
+        <!-- Section 6 -->
+        <section class="w3-padding-16">
+          <h3>6. Open Research Objectives</h3>
+          <p>What scaling performance ceilings exist when running highly deep cross-dependency graphs across edge-hosted local LLM clusters?</p>
+        </section>
+
+        <!-- Start of Section 7 -->
+<div class="w3-container w3-margin-top">
+  <section class="w3-padding-32 w3-light-grey w3-container w3-card w3-round">
+    <h3 class="w3-text-teal"><b>Deploy Learning Substrates</b></h3>
+    <p>Access the core source code, model configurations, and localized orchestration parameters on the repository:</p>
+    
+    <div class="w3-padding-16">
+      <a href="https://github.com/kurban100/neuroncopilot" target="_blank" class="w3-button w3-black w3-hover-teal w3-round">
+        <i class="fa fa-github fa-fw w3-margin-right"></i>Clone GitHub Repository
+      </a>
+    </div>
+  </section>
+</div>
+<!-- News Section Placeholder -->
+<div id="news-section" class="w3-container w3-padding-64 w3-light-grey w3-border-top w3-border-light-grey" style="margin-left: 250px;">
+  <div class="w3-content" style="max-width:800px">
+    <h2 class="w3-text-purple" style="font-weight:600;">📰 News & Updates</h2>
+    <p class="w3-text-grey" style="font-size:16px; margin-top:12px;">
+      Welcome to the NeuronCopilot news hub. System logs, recent code iterations, and deployment announcements will be populated here as the project updates.
+    </p>
+    <div class="w3-panel w3-leftbar w3-border-purple w3-white w3-padding-16 w3-margin-top w3-card-2">
+      <p class="w3-text-dark-grey" style="font-style:italic; margin:0;">
+        "Placeholder: The first official project log or newsletter update entry goes right here."
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ... End of Section 7 Content ... -->
+<!-- Navigation Links (Add or update this in your existing navigation bar) -->
+<!-- News Section Placeholder -->
+<div id="news-section" class="w3-container w3-padding-64 w3-light-grey" style="margin-left: 250px;">
+  <h2 class="w3-text-purple">📰 News Section</h2>
+  <p class="w3-text-grey">Latest announcements and project updates will be posted here soon.</p>
+</div>
+
+<!-- Partners Section Placeholder -->
+<div id="partners-section" class="w3-container w3-padding-64" style="margin-left: 250px;">
+  <h2 class="w3-text-purple">🤝 Institutional Partners</h2>
+  <p class="w3-text-grey">A list of our research collaborators and project partners will appear here.</p>
+</div>
+
+<div class="w3-bar w3-black">
+  <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact Us</a>
+</div>
+
+<!-- Page Sections (Paste this right below your Section 7 content) --> 
+<section id="contact" class="w3-padding-32 w3-light-grey w3-container w3-card w3-round w3-margin-top"> 
+  <h3 class="w3-text-teal"><b>Contact Neuron Copilot</b></h3> 
+  <p class="w3-large">Have questions? Reach out to our orchestration team directly.</p> 
+  
+  <!--Email--> 
+  <p class="w3-xlarge">
+    <i class="fa fa-envelope fa-fw w3-margin-right w3-text-teal"></i>Email: 
+    <a href="mailto:kurban@neuronmachinellc.com" class="w3-hover-text-teal" style="text-decoration:none;">kurban@neuronmachinellc.com</a> 
+  </p> 
+  
+  <!-- GitHub Repository --> 
+  <p class="w3-xlarge"> 
+    <i class="fa fa-github fa-fw w3-margin-right w3-text-teal"></i>Repository: 
+    <a href="https://github.com/kurban100/neuroncopilot" target="_blank" class="w3-hover-text-teal" style="text-decoration:none;">kurban100/neuroncopilot</a> 
+  </p> 
+</section>
+
+<!-- Verify that these parent rows close elements matching your outer template structure -->
+    </div> <!-- Closes your w3-row-padding or content grid -->
+  </div> <!-- Closes your #neuroncopilot-page container -->
+</div> <!-- Closes your #view-classroom master application wrapper -->
+
+<!-- Shifted Container to prevent Left Sidebar overlap -->
+<!-- This container automatically handles the sidebar shift -->
+<<!-- This container automatically handles the sidebar shift -->
+<div class="w Main" style="margin-left: 250px;">
+  <div class="w3-padding-16">
+    <h4 class="w3-border-bottom w3-padding-16" style="font-weight: bold; margin-top: 0; display: block;">
+      Technical Modules
+    </h4>
+    
+    <!-- Active Lab Node Card -->
+    <div class="w3-card w3-light-grey w3-margin-bottom w3-container w3-padding-16" style="display: block;">
+      <h5 style="margin-top: 0; font-weight: bold;">Active Lab Node</h5>
+      <p class="w3-small" style="display: block; margin: 0;">
+        Download the primary slide deck sequence located on the left menu sidebar to evaluate neural engine baselines.
+      </p>
+    </div>
+    
+    <!-- Updated Domain Focus Card -->
+    <div class="w3-card w3-light-grey w3-margin-bottom w3-container w3-padding-16" style="display: block;">
+      <h5 style="margin-top: 0; font-weight: bold;">Domain Focus</h5>
+      <p class="w3-small" style="display: block; margin: 0;">
+        Review the RAG framework and Neo4j graph modules to view the underlying concept dependency maps.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openSection(evt, sectionName) {
+  // 1. Find your Neural Network content block
+  var targetSection = document.getElementById(sectionName);
+  
+  if (targetSection) {
+    // 2. If it is hidden, show it!
+    if (targetSection.style.display === "none" || targetSection.style.display === "") {
+      targetSection.style.display = "block";
+    } else {
+      // 3. Optional: If clicked again, hide it
+      targetSection.style.display = "none";
+    }
+  } else {
+    console.error("Could not find a section with the ID: " + sectionName);
+  }
+}
+</script>
+
+
+</body>
+</html>
